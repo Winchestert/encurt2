@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, redirect
+import string, random
 
 
 
@@ -12,8 +13,11 @@ def encurtar():
     url = request.json.get('url')  # Obtém a URL original do corpo da requisição POST
     if url:
         # Gere uma chave única para a URL curta (por exemplo, utilizando hash ou algum algoritmo de encurtamento)
-        chave = 'url_curta_gerada' # Substitua com o algoritmo de sua escolha
-
+        def generate_short_code(length=6):
+            chars = string.ascii_letters + string.digits
+            code = ''.join(random.choice(chars) for _ in range(length))
+            return code # Algoritmon de Encurtamento
+        
         # Armazena a URL original e a URL curta no dicionário
         urls[chave] = url
 
